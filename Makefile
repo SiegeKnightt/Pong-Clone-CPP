@@ -1,3 +1,6 @@
+# Make command for Windows
+# $mingw32-make -f .\Makefile
+
 # Compiler
 CXX = g++
 
