@@ -1,8 +1,7 @@
-#include <iostream>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
-
-using namespace std;
+#include <SDL3/SDL_events.h>
+#include <renderer.h>
 
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
@@ -20,6 +19,9 @@ int main(int argc, char* argv[]) {
 
     bool running = true;
 
+    int current_width = WINDOW_WIDTH;
+    int current_height = WINDOW_HEIGHT;
+
     // Game logic
     while (running) {
 
@@ -32,17 +34,18 @@ int main(int argc, char* argv[]) {
 
                 running = false;
             }
+
+            // Gathers the new height and width of the window after being resized
+            if (event.type == SDL_EVENT_WINDOW_RESIZED) {
+                
+                current_width = event.window.data1;
+                current_height= event.window.data2;
+
+                SDL_Log("Window size changed: %d x %d", current_width, current_height);
+            }
         }
 
-        // Clear the window to black
-        // R,G,B
-        SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, SDL_ALPHA_OPAQUE);
-        SDL_RenderClear(renderer);
-
-        // Rendering will occur here
-        
-        // Presents the backbuffer
-        SDL_RenderPresent(renderer);
+        DrawGame(renderer, current_width, current_height);
     }
     
     // Cleanup SDL 

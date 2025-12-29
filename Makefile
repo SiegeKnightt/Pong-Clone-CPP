@@ -8,7 +8,7 @@ CXX = g++
 SDL_PATH = C:/sdl3
 
 # Compiler flags
-CXXFLAGS = -Wall -g -I$(SDL_PATH)/include
+CXXFLAGS = -Wall -g -I$(SDL_PATH)/include -I.
 
 # Linker flags
 LDFLAGS = -L$(SDL_PATH)/lib -lmingw32 -lSDL3 -mwindows
@@ -20,7 +20,7 @@ TARGET = pong
 TARGET_DEL = pong.exe
 
 # Source files
-SOURCES = main.cpp
+SOURCES = main.cpp renderer.cpp
   
 # Object files
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -36,12 +36,8 @@ $(TARGET): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS) $(LDFLAGS)
 
 # Rule to compile .cpp files into .o files
-%.o: %.cpp
+%.o: %.cpp renderer.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Copy the DLL to the project root so that the program can run
-copy_dll:
-	@if exist $(DLL_SRC) (copy /Y $(DLL_SRC) . >nul) else (echo Warning: SDL3.dll not found!)
 
 # Rule to run the executable
 run: $(TARGET)
@@ -49,4 +45,4 @@ run: $(TARGET)
 
 # Clean rule to remove generated files
 clean:
-	del $(TARGET_DEL) $(OBJECTSS) SDL3.dll 2>nul
+	del $(TARGET_DEL) $(OBJECTS) SDL3.dll 2>nul
