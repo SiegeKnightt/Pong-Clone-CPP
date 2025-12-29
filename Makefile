@@ -14,17 +14,17 @@ TARGET = pong
 TARGET_DEL = pong.exe
 
 # Source files
-SRCS = main.cpp
-
+SOURCES = main.cpp
+  
 # Object files
-OBJS = $(SRCS:.cpp=.o)
+OBJECTS = $(SOURCES:.cpp=.o)
 
 # Default rule to build and run the executable
 all: $(TARGET) run
 
 # Rule to link object files into the target executable
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+$(TARGET): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS)
 
 # Rule to compile .cpp files into .o files
 %.o: %.cpp
