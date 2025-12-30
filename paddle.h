@@ -13,14 +13,14 @@ class Paddle {
     public:
         static const int PADDLE_WIDTH = 15;
         static const int PADDLE_HEIGHT = 90;
-        static constexpr float RESIZE_RATIO = 0.2;
+        static constexpr float RESIZE_RATIO = 0.15;
         static constexpr float MARGIN = 30.0f;
 
         int width = PADDLE_WIDTH;
         int height = PADDLE_HEIGHT;
         bool isRightSide;
 
-        Paddle(Vec2 position, int red, int green, int blue, bool isRight);
+        Paddle(int red, int green, int blue, bool isRight);
 
         void Draw(SDL_Renderer* renderer);
 

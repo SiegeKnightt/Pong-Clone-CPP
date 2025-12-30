@@ -1,6 +1,6 @@
 #include <paddle.h>
 
-Paddle::Paddle(Vec2 position, int red, int green, int blue, bool isRight) : position(position) {
+Paddle::Paddle(int red, int green, int blue, bool isRight) {
 
     rect.w = PADDLE_WIDTH;
     rect.h = PADDLE_HEIGHT;
@@ -26,7 +26,7 @@ void Paddle::Resize(int windowWidth, int windowHeight) {
 
     height = windowHeight * RESIZE_RATIO;
 
-    position.y = (windowHeight / 2) - (height/ 2);
+    position.y = (windowHeight / 2) - (height / 2);
 
     if (isRightSide) {
 

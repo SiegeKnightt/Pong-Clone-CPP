@@ -29,8 +29,13 @@ int main(int argc, char* argv[]) {
 
     // Create the paddles and set them to their appropriate positions 
     // Also set colors (p1 is red, p2 is blue)
-    Paddle paddleOne(Vec2(50, (current_height / 2) - (Paddle::PADDLE_HEIGHT / 2)), 255, 0, 0, false);
-    Paddle paddleTwo(Vec2(current_width - 50, (current_height / 2) - (Paddle::PADDLE_HEIGHT / 2)), 0, 0 , 255, true);
+    Paddle paddleOne(255, 0, 0, false);
+    Paddle paddleTwo(0, 0 , 255, true);
+    paddleOne.Resize(current_width, current_height);
+    paddleTwo.Resize(current_width, current_height);
+
+    SDL_Log("Paddle 1 height is %d", paddleOne.height);
+    SDL_Log("Paddle 2 height is %d", paddleTwo.height);
 
     // Game logic
     while (running) {
@@ -56,6 +61,9 @@ int main(int argc, char* argv[]) {
                 // Reposition paddles to account for new screen size
                 paddleOne.Resize(current_width, current_height);
                 paddleTwo.Resize(current_width, current_height);
+
+                SDL_Log("Paddle 1 height is %d", paddleOne.height);
+                SDL_Log("Paddle 2 height is %d", paddleTwo.height);
             }
         }
 
