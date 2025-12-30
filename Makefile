@@ -17,9 +17,6 @@ LDFLAGS = -L$(SDL_PATH)/lib -lmingw32 -lSDL3 -mwindows -lSDL3_ttf
 # Target executable
 TARGET = pong
 
-# For deleting the target
-TARGET_DEL = pong.exe
-
 # Source files
 SOURCES = main.cpp net.cpp ball.cpp paddle.cpp score.cpp
   
@@ -46,4 +43,4 @@ run: $(TARGET)
 
 # Clean rule to remove generated files
 clean:
-	del $(TARGET_DEL) $(OBJECTS) SDL3.dll *.o
+	del $(OBJECTS) SDL3.dll *.o
