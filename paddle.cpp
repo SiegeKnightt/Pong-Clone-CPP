@@ -38,6 +38,4 @@ void Paddle::Resize(int windowWidth, int windowHeight) {
     }
 
     rect.h = static_cast<int>(height);
-    //rect.x = position.x;
-    //rect.y = position.y;
 }
