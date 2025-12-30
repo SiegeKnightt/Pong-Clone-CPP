@@ -1,6 +1,6 @@
 #include <paddle.h>
 
-Paddle::Paddle(Vec2 position, int red, int green, int blue) : position(position) {
+Paddle::Paddle(Vec2 position, int red, int green, int blue, bool isRight) : position(position) {
 
     rect.w = PADDLE_WIDTH;
     rect.h = PADDLE_HEIGHT;
@@ -9,14 +9,35 @@ Paddle::Paddle(Vec2 position, int red, int green, int blue) : position(position)
     g = green;
     b = blue;
     a = 255;
+
+    isRightSide = isRight;
 } 
 
 void Paddle::Draw(SDL_Renderer* renderer) {
 
-    // Have to cast to an int since position is a float
-    rect.x = static_cast<int>(position.x);
-    rect.y = static_cast<int>(position.y);
+    rect.x = position.x;
+    rect.y = position.y;
 
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
     SDL_RenderFillRect(renderer, &rect);
+}
+
+void Paddle::Resize(int windowWidth, int windowHeight) {
+
+    height = windowHeight * RESIZE_RATIO;
+
+    position.y = (windowHeight / 2) - (height/ 2);
+
+    if (isRightSide) {
+
+        position.x = windowWidth - 50 - width;
+    }
+    else {
+
+        position.x = MARGIN;
+    }
+
+    rect.h = static_cast<int>(height);
+    //rect.x = position.x;
+    //rect.y = position.y;
 }

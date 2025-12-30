@@ -27,9 +27,10 @@ int main(int argc, char* argv[]) {
     // Create the ball and set it to the center of the screen
     Ball ball(Vec2((current_width / 2) - (Ball::BALL_WIDTH / 2), (current_height / 2) - (Ball::BALL_HEIGHT / 2)));
 
-    // Create the paddles and set them to their appropriate positions
-    Paddle paddleOne(Vec2(50, (current_height / 2) - (Paddle::PADDLE_HEIGHT / 2)), 255, 0, 0);
-    Paddle paddleTwo(Vec2(current_width - 50, (current_height / 2) - (Paddle::PADDLE_HEIGHT / 2)), 0, 0 , 255);
+    // Create the paddles and set them to their appropriate positions 
+    // Also set colors (p1 is red, p2 is blue)
+    Paddle paddleOne(Vec2(50, (current_height / 2) - (Paddle::PADDLE_HEIGHT / 2)), 255, 0, 0, false);
+    Paddle paddleTwo(Vec2(current_width - 50, (current_height / 2) - (Paddle::PADDLE_HEIGHT / 2)), 0, 0 , 255, true);
 
     // Game logic
     while (running) {
@@ -51,6 +52,10 @@ int main(int argc, char* argv[]) {
                 current_height= event.window.data2;
 
                 SDL_Log("Window size changed: %d x %d", current_width, current_height);
+
+                // Reposition paddles to account for new screen size
+                paddleOne.Resize(current_width, current_height);
+                paddleTwo.Resize(current_width, current_height);
             }
         }
 

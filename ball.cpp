@@ -8,9 +8,8 @@ Ball::Ball(Vec2 position) :position(position) {
 
 void Ball::Draw(SDL_Renderer* renderer) {
 
-    // Have to cast to an int since position is a float
-    rect.x = static_cast<int>(position.x);
-    rect.y = static_cast<int>(position.y);
+    rect.x = position.x;
+    rect.y = position.y;
 
     SDL_RenderFillRect(renderer, &rect);
 }
