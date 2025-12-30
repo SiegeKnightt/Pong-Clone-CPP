@@ -1,11 +1,6 @@
 #include "renderer.h"
 
-void DrawGame(SDL_Renderer* renderer, int width, int height) {
-    
-    // Clear the window background to black
-    // R,G,B
-    SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0xFF);
-    SDL_RenderClear(renderer);
+void DrawGame(SDL_Renderer* renderer, int width, int height) { 
 
     // Draw Net
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -19,9 +14,4 @@ void DrawGame(SDL_Renderer* renderer, int width, int height) {
             SDL_RenderPoint(renderer, (float)width / 2.0, (float)y);
         }
     }
-
-    // Draw paddles?
-
-    // Presents the backbuffer to prevent player from seeing things being drawn
-    SDL_RenderPresent(renderer);
 }

@@ -2,6 +2,7 @@
 #include <SDL3/SDL_main.h>
 #include <SDL3/SDL_events.h>
 #include <renderer.h>
+#include <ball.h>
 
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
@@ -17,10 +18,13 @@ int main(int argc, char* argv[]) {
     // Creates the renderer for the game window
     SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
 
+    // Create the ball
+    Ball ball(Vec2(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2));
+
     bool running = true;
 
     int current_width = WINDOW_WIDTH;
-    int current_height = WINDOW_HEIGHT;
+    int current_height = WINDOW_HEIGHT; 
 
     // Game logic
     while (running) {
@@ -45,7 +49,20 @@ int main(int argc, char* argv[]) {
             }
         }
 
+        // Clear the window background to black
+        // R,G,B
+        SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0xFF);
+        SDL_RenderClear(renderer);
+        
+        // Draw the game and net
         DrawGame(renderer, current_width, current_height);
+
+        // Draw the ball
+        ball.Draw(renderer);
+
+        // Presents the backbuffer to show final drawn image at the end of a frame
+        // Prevents player from seeing things being drawn in real time
+        SDL_RenderPresent(renderer);
     }
     
     // Cleanup SDL 

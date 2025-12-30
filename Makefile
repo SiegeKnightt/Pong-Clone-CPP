@@ -21,7 +21,7 @@ TARGET = pong
 TARGET_DEL = pong.exe
 
 # Source files
-SOURCES = main.cpp renderer.cpp
+SOURCES = main.cpp renderer.cpp ball.cpp
   
 # Object files
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -37,7 +37,7 @@ $(TARGET): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS) $(LDFLAGS)
 
 # Rule to compile .cpp files into .o files
-%.o: %.cpp renderer.h
+%.o: %.cpp renderer.h ball.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Rule to run the executable
