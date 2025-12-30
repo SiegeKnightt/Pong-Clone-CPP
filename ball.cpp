@@ -1,8 +1,5 @@
 #include <ball.h>
 
-const int BALL_WIDTH = 15;
-const int BALL_HEIGHT = 15;
-
 Ball::Ball(Vec2 position) :position(position) {
 
     rect.w = BALL_WIDTH;

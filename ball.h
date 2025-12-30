@@ -15,6 +15,9 @@ class Vec2 {
 
 class Ball {
     public:
+        static const int BALL_WIDTH = 15;
+        static const int BALL_HEIGHT = 15;
+        
         Ball(Vec2 position);
 
         void Draw(SDL_Renderer* renderer);

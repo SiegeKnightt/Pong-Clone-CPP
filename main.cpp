@@ -18,13 +18,13 @@ int main(int argc, char* argv[]) {
     // Creates the renderer for the game window
     SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
 
-    // Create the ball
-    Ball ball(Vec2(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2));
-
     bool running = true;
 
     int current_width = WINDOW_WIDTH;
     int current_height = WINDOW_HEIGHT; 
+
+    // Create the ball and set it to the center of the screen
+    Ball ball(Vec2((current_width / 2) - (Ball::BALL_WIDTH / 2), (current_height / 2) - (Ball::BALL_HEIGHT / 2)));
 
     // Game logic
     while (running) {
