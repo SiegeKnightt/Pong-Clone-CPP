@@ -3,6 +3,7 @@
 #include <SDL3/SDL_events.h>
 #include <renderer.h>
 #include <ball.h>
+#include <paddle.h>
 
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
@@ -25,6 +26,10 @@ int main(int argc, char* argv[]) {
 
     // Create the ball and set it to the center of the screen
     Ball ball(Vec2((current_width / 2) - (Ball::BALL_WIDTH / 2), (current_height / 2) - (Ball::BALL_HEIGHT / 2)));
+
+    // Create the paddles and set them to their appropriate positions
+    Paddle paddleOne(Vec2(50, (current_height / 2) - (Paddle::PADDLE_HEIGHT / 2)), 255, 0, 0);
+    Paddle paddleTwo(Vec2(current_width - 50, (current_height / 2) - (Paddle::PADDLE_HEIGHT / 2)), 0, 0 , 255);
 
     // Game logic
     while (running) {
@@ -59,6 +64,10 @@ int main(int argc, char* argv[]) {
 
         // Draw the ball
         ball.Draw(renderer);
+
+        // Draw the paddles
+        paddleOne.Draw(renderer);
+        paddleTwo.Draw(renderer);
 
         // Presents the backbuffer to show final drawn image at the end of a frame
         // Prevents player from seeing things being drawn in real time

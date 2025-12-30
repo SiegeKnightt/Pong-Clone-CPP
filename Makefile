@@ -21,7 +21,7 @@ TARGET = pong
 TARGET_DEL = pong.exe
 
 # Source files
-SOURCES = main.cpp renderer.cpp ball.cpp
+SOURCES = main.cpp renderer.cpp ball.cpp paddle.cpp
   
 # Object files
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -37,7 +37,7 @@ $(TARGET): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS) $(LDFLAGS)
 
 # Rule to compile .cpp files into .o files
-%.o: %.cpp renderer.h ball.h
+%.o: %.cpp renderer.h ball.h paddle.h vec2.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Rule to run the executable
@@ -46,4 +46,4 @@ run: $(TARGET)
 
 # Clean rule to remove generated files
 clean:
-	del $(TARGET_DEL) $(OBJECTS) SDL3.dll 2>nul
+	del $(TARGET_DEL) $(OBJECTS) SDL3.dll *.o

@@ -2,22 +2,13 @@
 #define BALL_H
 
 #include <SDL3/SDL.h>
-
-class Vec2 {
-    public:
-        // Constructors
-        Vec2() : x(0.0f), y(0.0f) {}
-        Vec2(float x, float y) : x(x), y(y) {}
-
-        float x;
-        float y;
-};
+#include <vec2.h>
 
 class Ball {
     public:
         static const int BALL_WIDTH = 15;
         static const int BALL_HEIGHT = 15;
-        
+
         Ball(Vec2 position);
 
         void Draw(SDL_Renderer* renderer);
