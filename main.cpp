@@ -24,6 +24,11 @@ int main(int argc, char* argv[]) {
     // Initialize the score font
     TTF_Font* scoreFont = TTF_OpenFont("DejaVuSansMono.ttf", 40);
 
+    if (scoreFont == nullptr) {
+
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Failed to load font: %s", SDL_GetError());
+    }
+
     bool running = true;
 
     int current_width = WINDOW_WIDTH;
@@ -38,9 +43,6 @@ int main(int argc, char* argv[]) {
     Paddle paddleTwo(0, 0 , 255, true);
     paddleOne.Resize(current_width, current_height);
     paddleTwo.Resize(current_width, current_height);
-
-    SDL_Log("Paddle 1 height is %d", paddleOne.height);
-    SDL_Log("Paddle 2 height is %d", paddleTwo.height);
 
     // Game logic
     while (running) {
@@ -67,8 +69,8 @@ int main(int argc, char* argv[]) {
                 paddleOne.Resize(current_width, current_height);
                 paddleTwo.Resize(current_width, current_height);
 
-                SDL_Log("Paddle 1 height is %d", paddleOne.height);
-                SDL_Log("Paddle 2 height is %d", paddleTwo.height);
+                SDL_Log("Paddle 1 height is now %d", paddleOne.height);
+                SDL_Log("Paddle 2 height is now %d", paddleTwo.height);
             }
         }
 
