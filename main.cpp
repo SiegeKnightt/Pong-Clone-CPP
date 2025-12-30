@@ -2,9 +2,11 @@
 #include <SDL3/SDL_main.h>
 #include <SDL3/SDL_events.h>
 #include <SDL_ttf.h>
+#include <string>
 #include <net.h>
 #include <ball.h>
 #include <paddle.h>
+#include <score.h>
 
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
@@ -33,6 +35,14 @@ int main(int argc, char* argv[]) {
 
     int current_width = WINDOW_WIDTH;
     int current_height = WINDOW_HEIGHT; 
+    int score1 = 0;
+    int score2 = 0;
+
+    // Creates the score texture and win texture
+    SDL_Texture* scoreTexture = CreateScoreTexture(renderer, scoreFont, score1, score2);
+    SDL_Texture* winTexture = nullptr;
+
+    SDL_Log("Score: %d : %d", score1, score2);
 
     // Create the ball and set it to the center of the screen
     Ball ball(Vec2((current_width / 2) - (Ball::BALL_WIDTH / 2), (current_height / 2) - (Ball::BALL_HEIGHT / 2)), Vec2(Ball::BALL_VELOCITY_X, Ball::BALL_VELOCITY_Y));
@@ -83,14 +93,72 @@ int main(int argc, char* argv[]) {
         DrawNet(renderer, current_width, current_height);
 
         // Update the ball's position
-        ball.Update(current_width, current_height);
+        int result = ball.Update(current_width, current_height);
+
+        // Score keeping
+        if (result > 0) {
+
+            if (result == 1) {
+
+                score1++;
+                SDL_Log("Score: %d : %d", score1, score2);
+            }
+            else if (result == 2) {
+
+                score2++;
+                SDL_Log("Score: %d : %d", score1, score2);
+            }
+
+            // Redraw the score texture
+            SDL_DestroyTexture(scoreTexture);
+            scoreTexture = CreateScoreTexture(renderer, scoreFont, score1, score2);
+
+            // Win condition
+            if (score1 >= 10 || score2 >= 10) {
+
+                // Stop the ball's movement
+                ball.velocity.x = 0.0;
+                ball.velocity.y = 0.0;
+
+                std::string winMessage = (score1 >= 10) ? "PLAYER 1 WINS!" : "PLAYER 2 WINS!";
+                SDL_Color gold = { 255, 215, 0, 255 };
+
+                SDL_Surface* winSurface = TTF_RenderText_Blended(scoreFont, winMessage.c_str(), 0, gold);
+                winTexture = SDL_CreateTextureFromSurface(renderer, winSurface);
+                SDL_DestroySurface(winSurface);
+
+                if (winTexture != nullptr) {
+
+                    float winW;
+                    float winH;
+
+                    SDL_GetTextureSize(winTexture, &winW, &winH);
+
+                    // Center the message on screen
+                    SDL_FRect winRect = { ((current_width / 2) - (winW / 2)), ((current_height / 2) - (winH / 2)), winW, winH };
+
+                    SDL_RenderTexture(renderer, winTexture, NULL, &winRect);
+                }
+            }
+        }
 
         // Update paddle positions
         paddleOne.Update(current_height);
         paddleTwo.Update(current_height);
 
+        // Draw the score
+        float textW;
+        float textH;
+
+        SDL_GetTextureSize(scoreTexture, &textW, &textH);
+        SDL_FRect scoreRect = { (float)((current_width / 2) - (textW / 2)), 20.0, textW, textH };
+        SDL_RenderTexture(renderer, scoreTexture, NULL, &scoreRect);
+
         // Draw the ball
-        ball.Draw(renderer);
+        if (winTexture == nullptr) {
+
+            ball.Draw(renderer);
+        }
 
         // Collision detection between paddles and ball
         if (SDL_HasRectIntersectionFloat(&ball.rect, &paddleOne.rect)) {
@@ -146,6 +214,7 @@ int main(int argc, char* argv[]) {
     // Cleanup SDL 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    SDL_DestroyTexture(scoreTexture);
     TTF_CloseFont(scoreFont);
     TTF_Quit();
     SDL_Quit();

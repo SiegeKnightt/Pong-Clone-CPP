@@ -19,7 +19,7 @@ class Ball {
 
         void Draw(SDL_Renderer* renderer);
 
-        void Update(int windowWidth, int windowHeight);
+        int Update(int windowWidth, int windowHeight);
 
         SDL_FRect rect{};
 };

@@ -14,7 +14,7 @@ void Ball::Draw(SDL_Renderer* renderer) {
     SDL_RenderFillRect(renderer, &rect);
 }
 
-void Ball::Update(int windowWidth, int windowHeight) {
+int Ball::Update(int windowWidth, int windowHeight) {
 
     // Update position with new velocity
     position.x += velocity.x;
@@ -41,6 +41,8 @@ void Ball::Update(int windowWidth, int windowHeight) {
 
         velocity.x = -0.1;
         velocity.y = 0.0;
+
+        return 2;
     }
     else if ((position.x + BALL_WIDTH) > windowWidth) {
 
@@ -50,5 +52,7 @@ void Ball::Update(int windowWidth, int windowHeight) {
 
         velocity.x = 0.1;
         velocity.y = 0.0;
+
+        return 1;
     }
 }
