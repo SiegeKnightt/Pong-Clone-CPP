@@ -1,7 +1,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <SDL3/SDL_events.h>
-#include <renderer.h>
+#include <net.h>
 #include <ball.h>
 #include <paddle.h>
 
@@ -59,8 +59,8 @@ int main(int argc, char* argv[]) {
         SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0xFF);
         SDL_RenderClear(renderer);
         
-        // Draw the game and net
-        DrawGame(renderer, current_width, current_height);
+        // Draw the net
+        DrawNet(renderer, current_width, current_height);
 
         // Draw the ball
         ball.Draw(renderer);

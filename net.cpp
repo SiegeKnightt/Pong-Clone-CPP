@@ -1,8 +1,7 @@
-#include "renderer.h"
+#include "net.h"
 
-void DrawGame(SDL_Renderer* renderer, int width, int height) { 
+void DrawNet(SDL_Renderer* renderer, int width, int height) { 
 
-    // Draw Net
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     
     for (int y = 0; y < height; y++) {
