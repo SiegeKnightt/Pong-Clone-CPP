@@ -96,7 +96,7 @@ int main(int argc, char* argv[]) {
         int result = ball.Update(current_width, current_height);
 
         // Score keeping
-        if (result > 0) {
+        if (result >= 0) {
 
             if (result == 1) {
 

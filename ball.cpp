@@ -55,4 +55,6 @@ int Ball::Update(int windowWidth, int windowHeight) {
 
         return 1;
     }
+
+    return 0;
 }
