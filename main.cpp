@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
     SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
 
     // Initialize the score font
-    TTF_Font* scoreFont = TTF_OpenFont("DejaVuSansMono.ttf", 40);
+    TTF_Font* scoreFont = TTF_OpenFont("Minecraft.ttf", 40);
 
     if (scoreFont == nullptr) {
 
