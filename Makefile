@@ -9,10 +9,10 @@ CXX = g++
 SDL_PATH = C:/sdl3
 
 # Compiler flags
-CXXFLAGS = -Wall -g -I$(SDL_PATH)/include -I.
+CXXFLAGS = -Wall -g -I$(SDL_PATH)/include -I$(SDL_PATH)/include/SDL3_ttf -I.
 
 # Linker flags
-LDFLAGS = -L$(SDL_PATH)/lib -lmingw32 -lSDL3 -mwindows
+LDFLAGS = -L$(SDL_PATH)/lib -lmingw32 -lSDL3 -mwindows -lSDL3_ttf
 
 # Target executable
 TARGET = pong

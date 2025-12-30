@@ -1,6 +1,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <SDL3/SDL_events.h>
+#include <SDL_ttf.h>
 #include <net.h>
 #include <ball.h>
 #include <paddle.h>
@@ -12,12 +13,16 @@ int main(int argc, char* argv[]) {
 
     // Initialize SDL components
     SDL_Init(SDL_INIT_VIDEO);
+    TTF_Init();
 
     // Creates the game window
     SDL_Window* window = SDL_CreateWindow("Pong", WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
 
     // Creates the renderer for the game window
     SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
+
+    // Initialize the score font
+    TTF_Font* scoreFont = TTF_OpenFont("DejaVuSansMono.ttf", 40);
 
     bool running = true;
 
@@ -139,6 +144,8 @@ int main(int argc, char* argv[]) {
     // Cleanup SDL 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    TTF_CloseFont(scoreFont);
+    TTF_Quit();
     SDL_Quit();
 
     return 0;
