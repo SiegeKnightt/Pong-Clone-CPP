@@ -120,12 +120,16 @@ int main(int argc, char* argv[]) {
                 ball.velocity.x = 0.0;
                 ball.velocity.y = 0.0;
 
-                std::string winMessage = (score1 >= 10) ? "PLAYER 1 WINS!" : "PLAYER 2 WINS!";
-                SDL_Color gold = { 255, 215, 0, 255 };
+                // Potentially creating new winTexture every fram without this check 
+                if (winTexture == nullptr) {
 
-                SDL_Surface* winSurface = TTF_RenderText_Blended(scoreFont, winMessage.c_str(), 0, gold);
-                winTexture = SDL_CreateTextureFromSurface(renderer, winSurface);
-                SDL_DestroySurface(winSurface);
+                    std::string winMessage = (score1 >= 10) ? "PLAYER 1 WINS!" : "PLAYER 2 WINS!";
+                    SDL_Color gold = { 255, 215, 0, 255 };
+
+                    SDL_Surface* winSurface = TTF_RenderText_Blended(scoreFont, winMessage.c_str(), 0, gold);
+                    winTexture = SDL_CreateTextureFromSurface(renderer, winSurface);
+                    SDL_DestroySurface(winSurface);
+                }
 
                 if (winTexture != nullptr) {
 
