@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
     int current_height = WINDOW_HEIGHT; 
 
     // Create the ball and set it to the center of the screen
-    Ball ball(Vec2((current_width / 2) - (Ball::BALL_WIDTH / 2), (current_height / 2) - (Ball::BALL_HEIGHT / 2)));
+    Ball ball(Vec2((current_width / 2) - (Ball::BALL_WIDTH / 2), (current_height / 2) - (Ball::BALL_HEIGHT / 2)), Vec2(Ball::BALL_VELOCITY_X, Ball::BALL_VELOCITY_Y));
 
     // Create the paddles and set them to their appropriate positions 
     // Also set colors (p1 is red, p2 is blue)
@@ -75,12 +75,17 @@ int main(int argc, char* argv[]) {
         // Draw the net
         DrawNet(renderer, current_width, current_height);
 
-        // Draw the ball
-        ball.Draw(renderer);
+        // Update the ball's position
+        ball.Update(current_width, current_height);
 
         // Update paddle positions
         paddleOne.Update(current_height);
         paddleTwo.Update(current_height);
+
+        // Draw the ball
+        ball.Draw(renderer);\
+
+        // Collision detection between paddles and ball
 
         // Draw the paddles
         paddleOne.Draw(renderer);

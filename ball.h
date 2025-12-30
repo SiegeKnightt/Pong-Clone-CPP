@@ -8,12 +8,17 @@ class Ball {
     public:
         static const int BALL_WIDTH = 15;
         static const int BALL_HEIGHT = 15;
+        static constexpr float BALL_VELOCITY_X = -0.1;
+        static constexpr float BALL_VELOCITY_Y = -0.1;
 
-        Ball(Vec2 position);
+        Vec2 position;
+        Vec2 velocity = Vec2(BALL_VELOCITY_X, BALL_VELOCITY_Y);
+
+        Ball(Vec2 position, Vec2 vel);
 
         void Draw(SDL_Renderer* renderer);
 
-        Vec2 position;
+        void Update(int windowWidth, int windowHeight);
 
         SDL_FRect rect{};
 };
