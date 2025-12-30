@@ -1,2 +1,2 @@
 # Pong-Clone-C-
-Attempting to recreate Pong using C++ and SDL
+Attempting to recreate Pong using C++ and SDL3
