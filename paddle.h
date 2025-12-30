@@ -14,7 +14,7 @@ class Paddle {
         static const int PADDLE_WIDTH = 15;
         static const int PADDLE_HEIGHT = 90;
         static constexpr float RESIZE_RATIO = 0.15;
-        static constexpr float MARGIN = 30.0f;
+        static constexpr float MARGIN = 30.0;
 
         int width = PADDLE_WIDTH;
         int height = PADDLE_HEIGHT;

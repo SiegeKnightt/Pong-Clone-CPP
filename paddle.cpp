@@ -30,7 +30,7 @@ void Paddle::Resize(int windowWidth, int windowHeight) {
 
     if (isRightSide) {
 
-        position.x = windowWidth - 50 - width;
+        position.x = windowWidth - MARGIN - width;
     }
     else {
 
