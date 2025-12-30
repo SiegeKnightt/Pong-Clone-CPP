@@ -83,9 +83,49 @@ int main(int argc, char* argv[]) {
         paddleTwo.Update(current_height);
 
         // Draw the ball
-        ball.Draw(renderer);\
+        ball.Draw(renderer);
 
         // Collision detection between paddles and ball
+        if (SDL_HasRectIntersectionFloat(&ball.rect, &paddleOne.rect)) {
+
+            if (ball.velocity.x < 0) {
+                
+                ball.velocity.x *= -1;
+
+                // Find the centers of the paddle and ball
+                float paddleCenterY = paddleOne.rect.y + (paddleOne.rect.h / 2);
+                float ballCenterY = ball.rect.y + (ball.rect.h / 2);
+
+                // Find the relative position
+                // -1 means the ball hit the top
+                // 1 means the ball hit the bottom
+                float relativePositionY = (ballCenterY - paddleCenterY) / (paddleOne.rect.h / 2);
+
+                // Set the new y velocity based on the factor calculated above
+                // Multiple by max bounce angle constant
+                ball.velocity.y = relativePositionY * Ball::MAX_BOUNCE_ANGLE;
+            }
+        }
+        else if (SDL_HasRectIntersectionFloat(&ball.rect, &paddleTwo.rect)) {
+
+            if (ball.velocity.x > 0) {
+                
+                ball.velocity.x *= -1;
+
+                // Find the centers of the paddle and ball
+                float paddleCenterY = paddleTwo.rect.y + (paddleTwo.rect.h / 2);
+                float ballCenterY = ball.rect.y + (ball.rect.h / 2);
+
+                // Find the relative position
+                // -1 means the ball hit the top
+                // 1 means the ball hit the bottom
+                float relativePositionY = (ballCenterY - paddleCenterY) / (paddleTwo.rect.h / 2);
+
+                // Set the new y velocity based on the factor calculated above
+                // Multiple by max bounce angle constant
+                ball.velocity.y = relativePositionY * Ball::MAX_BOUNCE_ANGLE;
+            }
+        }
 
         // Draw the paddles
         paddleOne.Draw(renderer);

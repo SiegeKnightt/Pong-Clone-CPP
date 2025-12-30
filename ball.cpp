@@ -35,12 +35,20 @@ void Ball::Update(int windowWidth, int windowHeight) {
     // Check left/right collsion
     if (position.x < 0) {
 
-        position.x = 0;
-        velocity.x *= -1;
+        // Score go up for paddle 2
+        position.x = (windowWidth / 2) - (Ball::BALL_WIDTH / 2);
+        position.y = (windowHeight / 2) - (Ball::BALL_HEIGHT / 2);
+
+        velocity.x = -0.1;
+        velocity.y = 0.0;
     }
     else if ((position.x + BALL_WIDTH) > windowWidth) {
 
-        position.x =  windowWidth - BALL_WIDTH;
-        velocity.x *= -1;
+        // Score go up for paddle 1
+        position.x = (windowWidth / 2) - (Ball::BALL_WIDTH / 2);
+        position.y = (windowHeight / 2) - (Ball::BALL_HEIGHT / 2);
+
+        velocity.x = 0.1;
+        velocity.y = 0.0;
     }
 }
