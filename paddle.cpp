@@ -39,3 +39,54 @@ void Paddle::Resize(int windowWidth, int windowHeight) {
 
     rect.h = static_cast<int>(height);
 }
+
+void Paddle::Update(int windowHeight) {
+
+    const bool* state = SDL_GetKeyboardState(NULL);
+
+    // Check for paddle movement
+    if (!isRightSide) {
+
+        if (state[SDL_SCANCODE_W]) {
+
+            velocity = -0.1;
+        }
+        else if (state[SDL_SCANCODE_S]) {
+
+            velocity = 0.1;
+        }
+        else {
+
+            velocity = 0.0;
+        }
+    }
+    else {
+
+        if (state[SDL_SCANCODE_UP]) {
+
+            velocity = -0.1;
+        }
+        else if (state[SDL_SCANCODE_DOWN]) {
+
+            velocity = 0.1;
+        }
+        else {
+
+            velocity = 0.0;
+        }
+    }
+
+    // Update position with new velocity
+    position.y += velocity;
+
+    // Boundary checker
+    if (position.y < 0) {
+
+        position.y = 0;
+    }
+    else if ((position.y + height) > windowHeight) {
+
+        // Have to subtract the height of the paddle or it gets stuck out of bounds
+        position.y = windowHeight - height;
+    }
+}

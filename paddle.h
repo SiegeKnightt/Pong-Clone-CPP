@@ -19,12 +19,15 @@ class Paddle {
         int width = PADDLE_WIDTH;
         int height = PADDLE_HEIGHT;
         bool isRightSide;
+        float velocity = 0.0;
 
         Paddle(int red, int green, int blue, bool isRight);
 
         void Draw(SDL_Renderer* renderer);
 
         void Resize(int windowWidth, int windowHeight);
+
+        void Update(int windowHeight);
 
         Vec2 position;
 

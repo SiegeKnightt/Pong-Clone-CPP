@@ -78,6 +78,10 @@ int main(int argc, char* argv[]) {
         // Draw the ball
         ball.Draw(renderer);
 
+        // Update paddle positions
+        paddleOne.Update(current_height);
+        paddleTwo.Update(current_height);
+
         // Draw the paddles
         paddleOne.Draw(renderer);
         paddleTwo.Draw(renderer);
