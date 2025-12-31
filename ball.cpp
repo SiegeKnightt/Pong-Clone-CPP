@@ -14,11 +14,11 @@ void Ball::Draw(SDL_Renderer* renderer) {
     SDL_RenderFillRect(renderer, &rect);
 }
 
-int Ball::Update(int windowWidth, int windowHeight) {
+int Ball::Update(int windowWidth, int windowHeight, float deltaTime) {
 
     // Update position with new velocity
-    position.x += velocity.x;
-    position.y += velocity.y;
+    position.x += velocity.x * deltaTime;
+    position.y += velocity.y * deltaTime;
 
     // Check top/bottom collison
     if (position.y < 0) {
@@ -39,7 +39,7 @@ int Ball::Update(int windowWidth, int windowHeight) {
         position.x = (windowWidth / 2) - (Ball::BALL_WIDTH / 2);
         position.y = (windowHeight / 2) - (Ball::BALL_HEIGHT / 2);
 
-        velocity.x = -0.1;
+        velocity.x = BALL_VELOCITY_X;
         velocity.y = 0.0;
 
         return 2;
@@ -50,7 +50,7 @@ int Ball::Update(int windowWidth, int windowHeight) {
         position.x = (windowWidth / 2) - (Ball::BALL_WIDTH / 2);
         position.y = (windowHeight / 2) - (Ball::BALL_HEIGHT / 2);
 
-        velocity.x = 0.1;
+        velocity.x = BALL_VELOCITY_X * -1;
         velocity.y = 0.0;
 
         return 1;

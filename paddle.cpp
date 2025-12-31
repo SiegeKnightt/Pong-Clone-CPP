@@ -40,7 +40,7 @@ void Paddle::Resize(int windowWidth, int windowHeight) {
     rect.h = static_cast<int>(height);
 }
 
-void Paddle::Update(int windowHeight) {
+void Paddle::Update(int windowHeight, float deltaTime) {
 
     const bool* state = SDL_GetKeyboardState(NULL);
 
@@ -49,11 +49,11 @@ void Paddle::Update(int windowHeight) {
 
         if (state[SDL_SCANCODE_W]) {
 
-            velocity = -0.1;
+            velocity = -400;
         }
         else if (state[SDL_SCANCODE_S]) {
 
-            velocity = 0.1;
+            velocity = 400;
         }
         else {
 
@@ -64,11 +64,11 @@ void Paddle::Update(int windowHeight) {
 
         if (state[SDL_SCANCODE_UP]) {
 
-            velocity = -0.1;
+            velocity = -400;
         }
         else if (state[SDL_SCANCODE_DOWN]) {
 
-            velocity = 0.1;
+            velocity = 400;
         }
         else {
 
@@ -77,7 +77,7 @@ void Paddle::Update(int windowHeight) {
     }
 
     // Update position with new velocity
-    position.y += velocity;
+    position.y += velocity * deltaTime;
 
     // Boundary checker
     if (position.y < 0) {

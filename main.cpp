@@ -54,8 +54,15 @@ int main(int argc, char* argv[]) {
     paddleOne.Resize(current_width, current_height);
     paddleTwo.Resize(current_width, current_height);
 
+    // Last time
+    uint64_t last = SDL_GetTicks();
+
     // Game logic
     while (running) {
+
+        // Current time and delta time calc
+        uint64_t current = SDL_GetTicks();
+        float deltaTime = (current - last) / 1000.0f;
 
         SDL_Event event;
 
@@ -93,7 +100,7 @@ int main(int argc, char* argv[]) {
         DrawNet(renderer, current_width, current_height);
 
         // Update the ball's position
-        int result = ball.Update(current_width, current_height);
+        int result = ball.Update(current_width, current_height, deltaTime);
 
         // Score keeping
         if (result >= 0) {
@@ -147,8 +154,8 @@ int main(int argc, char* argv[]) {
         }
 
         // Update paddle positions
-        paddleOne.Update(current_height);
-        paddleTwo.Update(current_height);
+        paddleOne.Update(current_height, deltaTime);
+        paddleTwo.Update(current_height, deltaTime);
 
         // Draw the score
         float textW;
@@ -213,6 +220,9 @@ int main(int argc, char* argv[]) {
         // Presents the backbuffer to show final drawn image at the end of a frame
         // Prevents player from seeing things being drawn in real time
         SDL_RenderPresent(renderer);
+
+        // Update last time
+        last = current;
     }
     
     // Cleanup SDL 

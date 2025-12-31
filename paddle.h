@@ -27,7 +27,7 @@ class Paddle {
 
         void Resize(int windowWidth, int windowHeight);
 
-        void Update(int windowHeight);
+        void Update(int windowHeight, float deltaTime);
 
         Vec2 position;
 
