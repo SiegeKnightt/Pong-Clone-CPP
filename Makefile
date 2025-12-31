@@ -26,8 +26,11 @@ SOURCES = main.cpp net.cpp ball.cpp paddle.cpp score.cpp
 # Object files
 OBJECTS = $(SOURCES:.cpp=.o)
 
-# DLL path
-DLL_SRC = C:\sdl3\bin\SDL3.dll
+
+DEPLOY_DIR = pong_dist
+
+# Update these paths to where your MinGW bin folder is
+MINGW_BIN = C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin
 
 # Default rule to build and run the executable
 all: $(TARGET) run
@@ -47,3 +50,23 @@ run: $(TARGET)
 # Clean rule to remove generated files
 clean:
 	del $(TARGET_DEL) $(OBJECTS) SDL3.dll *.o
+
+# Deploy action
+deploy: $(TARGET)
+	@echo Creating distribution folder...
+	if not exist $(DEPLOY_DIR) mkdir $(DEPLOY_DIR)
+	
+	@echo Copying executable and assets...
+	copy $(TARGET).exe $(DEPLOY_DIR)
+	copy Minecraft.ttf $(DEPLOY_DIR)
+	
+	@echo Copying SDL DLLs...
+	copy "$(subst /,\,$(SDL_PATH))\bin\SDL3.dll" $(DEPLOY_DIR)
+	copy "$(subst /,\,$(SDL_PATH))\bin\SDL3_ttf.dll" $(DEPLOY_DIR)
+	
+	@echo Copying MinGW dependencies...
+	copy "$(subst /,\,$(MINGW_BIN))\libgcc_s_seh-1.dll" $(DEPLOY_DIR)
+	copy "$(subst /,\,$(MINGW_BIN))\libstdc++-6.dll" $(DEPLOY_DIR)
+	copy "$(subst /,\,$(MINGW_BIN))\libwinpthread-1.dll" $(DEPLOY_DIR)
+	
+	@echo Done!
