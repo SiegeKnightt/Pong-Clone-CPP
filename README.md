@@ -3,6 +3,9 @@ This is my attempt to recreate Pong using C++ and SDL3. This was my first projec
 
 <img width="1280" height="747" alt="image" src="https://github.com/user-attachments/assets/737de05b-311a-46a5-a718-0b4f22ff06e2" />
 
+# How To Play
+Download the latest release under the _releases_ tab and run directly!
+
 # Deployment Instructions
 Build the "pong.exe" file using MinGW 'deploy', and run the game from the created directory.
 
