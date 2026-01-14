@@ -62,7 +62,7 @@ int main(int argc, char* argv[]) {
 
         // Current time and delta time calc
         uint64_t current = SDL_GetTicks();
-        float deltaTime = (current - last) / 1000.0f;
+        float deltaTime = (current - last) / 1000.0;
 
         SDL_Event event;
 
