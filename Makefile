@@ -63,7 +63,7 @@ deploy: $(TARGET)
 	@echo Copying SDL DLLs...
 	copy "$(subst /,\,$(SDL_PATH))\bin\SDL3.dll" $(DEPLOY_DIR)
 	copy "$(subst /,\,$(SDL_PATH))\bin\SDL3_ttf.dll" $(DEPLOY_DIR)
-	
+	 
 	@echo Copying MinGW dependencies...
 	copy "$(subst /,\,$(MINGW_BIN))\libgcc_s_seh-1.dll" $(DEPLOY_DIR)
 	copy "$(subst /,\,$(MINGW_BIN))\libstdc++-6.dll" $(DEPLOY_DIR)
